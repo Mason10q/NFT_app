@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">NFT_app</string>
+    <string name="token_name">Token name</string>
+    <string name="author_name">Author name</string>
+</resources>
