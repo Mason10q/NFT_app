@@ -16,10 +16,8 @@ class TokenActivity : AppCompatActivity() {
         .NewInstanceFactory()
         .create(MainViewModel::class.java)
 
-    var amount = 0
 
     private lateinit var viewPager: ViewPager2
-
     @Inject lateinit var adapter : ViewPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,11 +29,15 @@ class TokenActivity : AppCompatActivity() {
             inject(viewModel)
         }
 
-
+        var flag: Boolean = true
         val currentItemPos = intent.getIntExtra("position", 1)
+        val pageNum = intent.getIntExtra("pageNum", 1)
+
+        viewModel.setPageNum(pageNum)
 
         viewPager = findViewById(R.id.viewpager)
         viewPager.adapter = adapter
+
 
         if(adapter.itemCount == 0) {
             viewModel.getAllTokens()
@@ -43,14 +45,12 @@ class TokenActivity : AppCompatActivity() {
 
         viewModel.tokens.observe(this) {
             adapter.addItems(it)
-            viewPager.setCurrentItem(currentItemPos, false)
-            amount = adapter.itemCount
-            Log.d("memmm", "set position ${adapter.itemCount}")
+            if (flag) viewPager.setCurrentItem(currentItemPos, false)
         }
 
         viewPager.onSwipeToEnd {
             viewModel.getNfts()
-            Log.d("memmm", "end")
+            flag = false
         }
     }
 

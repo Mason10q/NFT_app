@@ -34,7 +34,7 @@ data class Token(
             var tokenList = arrayListOf<Token>()
 
             list.forEach {
-                tokenList.add(Token(it.cach_url, it.metadata?.name!!, it.tokenID, it.date))
+                tokenList.add(Token(it.metadata?.image!!, it.metadata.name!!, it.tokenID, it.date))
             }
 
             return tokenList

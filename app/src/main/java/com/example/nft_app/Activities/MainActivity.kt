@@ -57,6 +57,7 @@ class MainActivity : AppCompatActivity(), TokenAdapter.ItemClickListener<Token> 
     override fun onItemClick(position: Int) =
         with(Intent(this, TokenActivity::class.java)){
             putExtra("position", position)
+            putExtra("pageNum", viewModel.getPageNumber())
             startActivity(this)
         }
 

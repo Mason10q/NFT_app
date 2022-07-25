@@ -9,7 +9,7 @@ import io.reactivex.rxjava3.core.Single
 @Dao
 interface TokenDAO {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertTokens(tokens: ArrayList<Token>): Completable
 
 

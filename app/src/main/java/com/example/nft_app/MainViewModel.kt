@@ -25,6 +25,8 @@ class MainViewModel : ViewModel() {
     var count: Int = 0
     private var pageNumber: Int = 0
 
+    fun getPageNumber() = pageNumber
+    fun setPageNum(newValue: Int) { pageNumber = newValue }
 
     fun getNfts() = api.getNfts(
         "0x34d85c9CDeB23FA97cb08333b511ac86E1C4E258",
