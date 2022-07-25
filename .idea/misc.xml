@@ -8,6 +8,9 @@
         <entry key="..\:/Users/user/AndroidStudioProjects/NFT_app/app/src/main/res/drawable/token_background.xml" value="0.2265" />
         <entry key="..\:/Users/user/AndroidStudioProjects/NFT_app/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/user/AndroidStudioProjects/NFT_app/app/src/main/res/layout/activity_nft.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/NFT_app/app/src/main/res/layout/activity_token.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/NFT_app/app/src/main/res/layout/fragment_token.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/NFT_app/app/src/main/res/layout/token_info_item.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/user/AndroidStudioProjects/NFT_app/app/src/main/res/layout/token_item.xml" value="0.264" />
       </map>
     </option>

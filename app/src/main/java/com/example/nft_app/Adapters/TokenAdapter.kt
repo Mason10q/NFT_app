@@ -2,21 +2,21 @@ package com.example.nft_app.Adapters
 
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView.OnItemClickListener
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nft_app.R
-import com.example.nft_app.Token
+import com.example.nft_app.DataBase.Token
 import com.example.nft_app.inflate
+import com.squareup.picasso.MemoryPolicy
+import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
 
 
 class TokenAdapter(val picasso: Picasso): RecyclerView.Adapter<TokenAdapter.ViewHolder>() {
 
     interface ItemClickListener<T>{
-        fun onItemClick(position: Int, item: Token, image: ImageView)
+        fun onItemClick(position: Int)
     }
 
     var tokenList = mutableListOf<Token>()
@@ -25,12 +25,7 @@ class TokenAdapter(val picasso: Picasso): RecyclerView.Adapter<TokenAdapter.View
 
     override fun getItemCount(): Int = tokenList.size
 
-    fun addItem(item: Token){
-        tokenList.add(item)
-        notifyDataSetChanged()
-    }
-
-    fun addItems(list: List<Token>){
+    fun addItems(list: MutableList<Token>){
         tokenList.addAll(list)
         notifyDataSetChanged()
     }
@@ -39,10 +34,10 @@ class TokenAdapter(val picasso: Picasso): RecyclerView.Adapter<TokenAdapter.View
 
         val holder = ViewHolder(parent.inflate(R.layout.token_item))
 
-        holder.itemView.setOnClickListener { v ->
-            val position: Int = holder.getAdapterPosition()
+        holder.itemView.setOnClickListener {
+            val position: Int = holder.adapterPosition
             if (position != RecyclerView.NO_POSITION) {
-                fireItemClicked(position, tokenList.get(position), holder)
+                fireItemClicked(position)
             }
         }
 
@@ -50,8 +45,8 @@ class TokenAdapter(val picasso: Picasso): RecyclerView.Adapter<TokenAdapter.View
     }
 
 
-    private fun fireItemClicked(position: Int, item: Token, holder: ViewHolder) =
-        itemClickListener.onItemClick(position, item, holder.image)
+    private fun fireItemClicked(position: Int) =
+        itemClickListener.onItemClick(position)
 
 
     fun setOnItemClickListener(listener: ItemClickListener<Token>) {
@@ -60,13 +55,17 @@ class TokenAdapter(val picasso: Picasso): RecyclerView.Adapter<TokenAdapter.View
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        picasso.load(tokenList[position].image)
+
+        val nft = tokenList[position]
+
+        picasso.load(nft.image)
             .placeholder(R.drawable.ic_nft)
             .fit()
             .centerCrop()
+            .networkPolicy(NetworkPolicy.NO_CACHE, NetworkPolicy.NO_STORE)
             .into(holder.image)
-        holder.name.text = tokenList[position].name
-        holder.price.text = tokenList[position].id
+        holder.name.text = nft.name
+        holder.id.text = nft.tokenId
     }
 
 
@@ -74,7 +73,7 @@ class TokenAdapter(val picasso: Picasso): RecyclerView.Adapter<TokenAdapter.View
     class ViewHolder(item: View): RecyclerView.ViewHolder(item){
         val image: ImageView = item.findViewById(R.id.token_image)
         val name: TextView = item.findViewById(R.id.token_name)
-        val price: TextView = item.findViewById(R.id.token_price)
+        val id: TextView = item.findViewById(R.id.token_price)
     }
 
 }

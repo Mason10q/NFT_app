@@ -10,23 +10,17 @@ interface TestApi {
     fun getNfts(
 
         @Path("contract_address")
-        contract : String,
+        contract : String = "",
         @Query("chain")
-        chain : String,
+        chain : String = "",
         @Query("page_number")
-        number: Int,
+        number: Int = 0,
         @Query("page_size")
-        size : Int,
+        size : Int = 0,
         @Query("include")
-        include : String
+        include : String = ""
 
-    ) : Single< DTO >
+    ): Single<DTO>
 
-
-    @GET("/ipfs")
-    fun getImage(
-        @Query("cid")
-        cid : String
-    )
 
 }

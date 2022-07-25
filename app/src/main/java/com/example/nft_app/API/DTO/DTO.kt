@@ -1,7 +1,7 @@
 package com.example.nft_app.API.DTO
 
+import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
-import org.jetbrains.annotations.Contract
 
 data class DTO(
 
